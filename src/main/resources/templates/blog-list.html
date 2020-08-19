@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+
+<body>
+<div th:switch="${articles}">
+    <h2 th:case="null">No articles found</h2>
+        <div th:case="*">
+            <h2>Articles</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Short review</td>
+                    <td>Full text</td>
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="article : ${articles}">
+                    <td th:text ="${article.id}"></td>
+                    <td th:text ="${article.title}"></td>
+                    <td th:text ="${article.shortReview}"></td>
+                    <td th:text ="${article.fullText}"></td>
+                    <td><a th:href="@{article-update/{id}(id=${article.id})}">Edit</a></td>
+                    <td><a th:href="@{article-delete/{id}(id=${article.id})}">Delete</a></td>
+<!--                    <div>-->
+<!--                        <td th:text="${article.filename} != null"></td>-->
+<!--                    </div>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <p><a href="/article-create">Create an article</a></p>
+
+    </div>
+</body>
+</html>
